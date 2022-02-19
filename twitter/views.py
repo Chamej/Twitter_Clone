@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Profile, Post
 from .forms import UserRegisterForm, PostForm
+from django.contrib.auth.models import User
 
 def home(request):
     posts = Post.objects.all()
@@ -33,4 +34,10 @@ def delete(request, post_id):
     post = Post.objects.get(id=post_id)
     post.delete()
     return redirect('Home')
-    
+
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    posts = user.posts.all()
+    context = {'user':user, 'posts':posts}
+    return render(request, 'twitter/profile.html', context)
