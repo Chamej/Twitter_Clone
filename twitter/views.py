@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import Profile, Post
 from .forms import UserRegisterForm, PostForm
@@ -29,3 +28,9 @@ def register(request):
 
     context = {'form' : form}
     return render(request, 'twitter/register.html', context)
+
+def delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return redirect('Home')
+    
