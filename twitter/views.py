@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Post
+from .models import Profile, Post, Relationship
 from .forms import UserRegisterForm, PostForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.models import User
 
@@ -58,4 +58,14 @@ def editar(request):
 
     context = {'u_form' : u_form, 'p_form' : p_form}
     return render(request, 'twitter/editar.html', context)
+
+
+def follow(request, username):
+    current_user = request.user
+    to_user = User.objects.get(username=username)
+    to_user_id = to_user
+    rel = Relationship(from_user=current_user, to_user=to_user_id)
+    rel.save()
+    return redirect('home')
+
         
