@@ -1,7 +1,9 @@
-from re import template
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -9,4 +11,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='twitter/login.html'), name='login'),
     path('logout/', LoginView.as_view(template_name='twitter/logout.html'), name='logout'),
     path('delete/<int:post_id>/', views.delete, name='delete'),
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
