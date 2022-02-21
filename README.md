@@ -1,5 +1,5 @@
 # Twitter_Clone
-A Twitter Clone mainly with Django, created for educational purposes
+A Twitter Clone mainly with Django, created for educational purposes using templates
 
 Install the following dependencies/libraries using pip install:  
 asgiref  
